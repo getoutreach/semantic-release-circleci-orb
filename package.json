@@ -1,7 +1,7 @@
 {
   "name": "@getoutreach/semantic-release-circleci-orb",
   "description": "semantic-release plugin to publish CircleCI Orbs",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "author": "Matt Oakes (https://mattoakes.net)",
   "scripts": {
     "pretest": "npm run lint",
