@@ -1,6 +1,6 @@
 import test from 'ava';
-import tempy from 'tempy';
-import verify from '../lib/verify';
+import { temporaryDirectory } from 'tempy';
+import verify from '../lib/verify.js';
 
 test('Verify "CIRCLECI_API_TOKEN" is set', async t => {
   t.deepEqual(await verify({orbName: 'org/orb'}, {env: {CIRCLECI_API_TOKEN: 'my_token'}}), []);
@@ -16,7 +16,7 @@ test('Return SemanticReleaseError if "CIRCLECI_API_TOKEN" is not set', async t =
 });
 
 test('Return SemanticReleaseError if "circleci" is not installed', async t => {
-  const [error] = await verify({orbName: 'org/orb'}, {env: {CIRCLECI_API_TOKEN: 'my_token', PATH: tempy.directory()}});
+  const [error] = await verify({orbName: 'org/orb'}, {env: {CIRCLECI_API_TOKEN: 'my_token', PATH: temporaryDirectory()}});
 
   t.is(error.name, 'SemanticReleaseError');
   t.is(error.code, 'ENOCIRCLECICLI');
