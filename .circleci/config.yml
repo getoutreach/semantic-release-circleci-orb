@@ -5,7 +5,7 @@ job_defaults: &job_defaults
     - image: circleci/node:8.10
   environment:
     - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
-    - PATH: '/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # -------------------------
 #          JOBS

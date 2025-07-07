@@ -1,6 +1,6 @@
-import AggregateError from 'aggregate-error';
-import verifyOrb from './lib/verify.js';
-import publishOrb from './lib/publish.js';
+import AggregateError from "aggregate-error";
+import verifyOrb from "./lib/verify.js";
+import publishOrb from "./lib/publish.js";
 
 let verified;
 

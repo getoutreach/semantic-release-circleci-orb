@@ -5,7 +5,7 @@
 [![npm latest version](https://img.shields.io/npm/v/semantic-release-circleci-orb/latest.svg)](https://www.npmjs.com/package/semantic-release-circleci-orb)
 
 | Step               | Description                                                                                                     |
-|--------------------|-----------------------------------------------------------------------------------------------------------------|
+| ------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `verifyConditions` | Verify the presence of the `CIRCLECI_API_TOKEN` environment variable, `orbName` option, and the `circleci` CLI. |
 | `publish`          | Publish the CircleCI orb.                                                                                       |
 
@@ -40,15 +40,15 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 ### Environment variables
 
-| Variable              | Description                                           |
-|-----------------------|-------------------------------------------------------|
-| `CIRCLECI_API_TOKEN`  | The token used to authenticate with CircleCI account. |
+| Variable             | Description                                           |
+| -------------------- | ----------------------------------------------------- |
+| `CIRCLECI_API_TOKEN` | The token used to authenticate with CircleCI account. |
 
 ### Options
 
 | Options       | Description                                                                                                                | Default                           |
-|---------------|----------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| `orbName`     | **Required**. The name of the Orb in the format of `organisation/orb`. For example, `react-native-community/circleci-orb`. | *None. You need to set your own.* |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `orbName`     | **Required**. The name of the Orb in the format of `organisation/orb`. For example, `react-native-community/circleci-orb`. | _None. You need to set your own._ |
 | `commandName` | The name of the CircleCI command to run.                                                                                   | `circleci`                        |
 | `orbPath`     | The path to the Orb YAML file. This needs to be a single (packed) YAML file.                                               | `orb.yml`                         |
 
