@@ -62,6 +62,9 @@
     "printWidth": 120,
     "trailingComma": "es5"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/getoutreach/semantic-release-circleci-orb.git"
