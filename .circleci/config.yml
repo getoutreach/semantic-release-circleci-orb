@@ -18,15 +18,8 @@ jobs:
     <<: *job_defaults
     steps:
       - checkout
-      - restore_cache:
-          key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
-      - run:
-          name: Yarn Install
-          command: yarn install --non-interactive --cache-folder ~/.cache/yarn
-      - save_cache:
-          paths:
-            - ~/.cache/yarn
-          key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
+      - shared/with_node_cache:
+          save: true
       - run:
           name: Run tests
           command: yarn test
