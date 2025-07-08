@@ -2,7 +2,7 @@ version: v1.43.0-rc.2
 modules:
     - name: github.com/getoutreach/devbase
       url: https://github.com/getoutreach/devbase
-      version: v2.33.0-rc.4
+      version: malept/dt-4793/feat/use-mise-instead-of-asdf-via-env-var
 files:
     - name: scripts/devbase.sh
       template: scripts/devbase.sh.tpl
