@@ -71,6 +71,8 @@ workflows:
             branches:
               ignore: master
           context:
+            - aws-credentials
+            - docker-registry
             - ghaccesstoken
       - publish:
           requires:
@@ -79,4 +81,6 @@ workflows:
             branches:
               only: master
           context:
+            - aws-credentials
+            - docker-registry
             - ghaccesstoken
