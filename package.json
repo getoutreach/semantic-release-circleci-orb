@@ -3,7 +3,10 @@
   "description": "semantic-release plugin to publish CircleCI Orbs",
   "version": "1.1.10",
   "author": "Matt Oakes (https://mattoakes.net)",
+  "type": "module",
   "scripts": {
+    "format": "prettier --write .",
+    "lint": "prettier --check . && oxlint --deny suspicious --deny pedantic",
     "pretest": "npm run lint",
     "semantic-release": "semantic-release",
     "test": "nyc ava -v"
@@ -15,18 +18,21 @@
     "Matt Oakes <hello@mattoakes.net> (https://mattoakes.net)"
   ],
   "dependencies": {
-    "@semantic-release/error": "^3.0.0",
-    "aggregate-error": "^3.1.0",
-    "execa": "^5.1.0"
+    "@semantic-release/error": "^4.0.0",
+    "aggregate-error": "^5.0.0",
+    "execa": "^9.6.0",
+    "oxlint": "^1.6.0"
   },
   "devDependencies": {
-    "ava": "^4.3.3",
-    "nyc": "^15.1.0",
-    "semantic-release": "^19.0.5",
+    "@semantic-release/git": "^10.0.1",
+    "ava": "^6.4.0",
+    "nyc": "^17.1.0",
+    "prettier": "^3.6.2",
+    "semantic-release": "^23.0.0",
     "tempy": "^3.0.0"
   },
   "engines": {
-    "node": ">=8.3"
+    "node": ">=20.16.0"
   },
   "files": [
     "lib",
@@ -56,18 +62,18 @@
     "all": true
   },
   "peerDependencies": {
-    "semantic-release": "^19.0.0"
+    "semantic-release": "^23.0.0"
   },
   "prettier": {
     "printWidth": 120,
     "trailingComma": "es5"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/getoutreach/semantic-release-circleci-orb.git"
-  },
-  "xo": {
-    "prettier": true,
-    "space": true
   }
 }

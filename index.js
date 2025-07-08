@@ -1,10 +1,10 @@
-const AggregateError = require('aggregate-error');
-const verifyOrb = require('./lib/verify');
-const publishOrb = require('./lib/publish');
+import AggregateError from "aggregate-error";
+import verifyOrb from "./lib/verify.js";
+import publishOrb from "./lib/publish.js";
 
 let verified;
 
-async function verifyConditions(pluginConfig, context) {
+export async function verifyConditions(pluginConfig, context) {
   const errors = await verifyOrb(pluginConfig, context);
 
   if (errors.length > 0) {
@@ -14,7 +14,7 @@ async function verifyConditions(pluginConfig, context) {
   verified = true;
 }
 
-async function publish(pluginConfig, context) {
+export async function publish(pluginConfig, context) {
   const errors = verified ? [] : await verifyOrb(pluginConfig, context);
 
   if (errors.length > 0) {
@@ -23,5 +23,3 @@ async function publish(pluginConfig, context) {
 
   return publishOrb(pluginConfig, context);
 }
-
-module.exports = {verifyConditions, publish};

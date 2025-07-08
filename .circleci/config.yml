@@ -1,11 +1,11 @@
-version: 2
+version: 2.1
 
 job_defaults: &job_defaults
   docker:
-    - image: circleci/node:8.10
+    - image: cimg/node:20.16.0
   environment:
     - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
-    - PATH: '/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # -------------------------
 #          JOBS
@@ -24,12 +24,12 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - restore-cache:
+      - restore_cache:
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
       - run:
           name: Yarn Install
           command: yarn install --non-interactive --cache-folder ~/.cache/yarn
-      - save-cache:
+      - save_cache:
           paths:
             - ~/.cache/yarn
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
@@ -42,12 +42,12 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - restore-cache:
+      - restore_cache:
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
       - run:
           name: Yarn Install
           command: yarn install --non-interactive --cache-folder ~/.cache/yarn
-      - save-cache:
+      - save_cache:
           paths:
             - ~/.cache/yarn
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
@@ -59,7 +59,6 @@ jobs:
 #        WORK FLOWS
 # -------------------------
 workflows:
-  version: 2
   test-publish:
     jobs:
       - checkout-code
