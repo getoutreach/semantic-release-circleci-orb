@@ -40,6 +40,8 @@ jobs:
         type: string
         description: "Extra flags to pass to semantic-release"
         default: ""
+    environment:
+      ALLOW_MISE_TO_MANAGE_TOOL_VERSIONS: "true"
     steps:
       - shared/setup_environment
       - restore_cache:
