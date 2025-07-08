@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
+    "lint": "oxlint --deny suspicious --deny pedantic",
     "semantic-release": "semantic-release",
     "test": "nyc ava -v"
   },
@@ -18,7 +19,8 @@
   "dependencies": {
     "@semantic-release/error": "^4.0.0",
     "aggregate-error": "^5.0.0",
-    "execa": "^9.6.0"
+    "execa": "^9.6.0",
+    "oxlint": "^1.6.0"
   },
   "devDependencies": {
     "ava": "^6.4.0",
@@ -71,9 +73,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/getoutreach/semantic-release-circleci-orb.git"
-  },
-  "xo": {
-    "prettier": true,
-    "space": true
   }
 }
