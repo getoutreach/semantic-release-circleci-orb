@@ -1,0 +1,4 @@
+name: semantic-release-circleci-orb
+modules:
+  - name: github.com/getoutreach/devbase
+    channel: rc

@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  shared: getoutreach/shared@dev:2.33.0-rc.4
+
 job_defaults: &job_defaults
   docker:
     - image: cimg/node:20.16.0
@@ -11,19 +14,10 @@ job_defaults: &job_defaults
 #          JOBS
 # -------------------------
 jobs:
-  checkout-code:
-    <<: *job_defaults
-    steps:
-      - checkout
-      - persist_to_workspace:
-          root: .
-          paths: .
-
   test:
     <<: *job_defaults
     steps:
-      - attach_workspace:
-          at: .
+      - checkout
       - restore_cache:
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
       - run:
@@ -38,15 +32,16 @@ jobs:
           command: yarn test
 
   publish:
-    <<: *job_defaults
+    executor:
+      name: shared/testbed-docker-aws
+      docker_tag: latest
     parameters:
       flags:
         type: string
         description: "Extra flags to pass to semantic-release"
         default: ""
     steps:
-      - attach_workspace:
-          at: .
+      - shared/setup_environment
       - restore_cache:
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
       - run:
@@ -66,10 +61,7 @@ jobs:
 workflows:
   test-publish:
     jobs:
-      - checkout-code
-      - test:
-          requires:
-            - checkout-code
+      - test
       - publish:
           name: publish-dryrun
           flags: "--dry-run"
