@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
-    "lint": "oxlint --deny suspicious --deny pedantic",
+    "lint": "prettier --check . && oxlint --deny suspicious --deny pedantic",
     "pretest": "npm run lint",
     "semantic-release": "semantic-release",
     "test": "nyc ava -v"
