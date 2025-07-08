@@ -39,6 +39,11 @@ jobs:
 
   publish:
     <<: *job_defaults
+    parameters:
+      flags:
+        type: string
+        description: "Extra flags to pass to semantic-release"
+        default: ""
     steps:
       - attach_workspace:
           at: .
@@ -52,8 +57,8 @@ jobs:
             - ~/.cache/yarn
           key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
       - run:
-          name: Publish to NPM
-          command: yarn semantic-release
+          name: Publish to GitHub Packages
+          command: yarn semantic-release << parameters.flags >>
 
 # -------------------------
 #        WORK FLOWS
@@ -66,8 +71,20 @@ workflows:
           requires:
             - checkout-code
       - publish:
+          name: publish-dryrun
+          flags: "--dry-run"
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: master
+          context:
+            - ghaccesstoken
+      - publish:
           requires:
             - test
           filters:
             branches:
               only: master
+          context:
+            - ghaccesstoken
