@@ -5,6 +5,7 @@
   "author": "Matt Oakes (https://mattoakes.net)",
   "type": "module",
   "scripts": {
+    "format": "prettier --write .",
     "semantic-release": "semantic-release",
     "test": "nyc ava -v"
   },
