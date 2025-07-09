@@ -2,7 +2,7 @@ version: v1.43.0-rc.2
 modules:
     - name: github.com/getoutreach/devbase
       url: https://github.com/getoutreach/devbase
-      version: malept/integration/release-dryrun
+      version: malept/fix/release-dryrun-all-commit-messages
 files:
     - name: scripts/devbase.sh
       template: scripts/devbase.sh.tpl
