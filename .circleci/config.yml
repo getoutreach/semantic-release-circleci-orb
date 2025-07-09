@@ -1,73 +1,46 @@
 version: 2.1
 
-job_defaults: &job_defaults
-  docker:
-    - image: cimg/node:20.16.0
-  environment:
-    - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
-    - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+orbs:
+  shared: getoutreach/shared@dev:2.33.0-rc.5
 
-# -------------------------
-#          JOBS
-# -------------------------
 jobs:
-  checkout-code:
-    <<: *job_defaults
+  test:
+    docker:
+      - image: cimg/node:20.16.0
+    environment:
+      - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
+      - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     steps:
       - checkout
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  test:
-    <<: *job_defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
-      - run:
-          name: Yarn Install
-          command: yarn install --non-interactive --cache-folder ~/.cache/yarn
-      - save_cache:
-          paths:
-            - ~/.cache/yarn
-          key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
+      - shared/with_node_cache:
+          save: true
       - run:
           name: Run tests
           command: yarn test
 
-  publish:
-    <<: *job_defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
-      - run:
-          name: Yarn Install
-          command: yarn install --non-interactive --cache-folder ~/.cache/yarn
-      - save_cache:
-          paths:
-            - ~/.cache/yarn
-          key: yarn-cache-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
-      - run:
-          name: Publish to NPM
-          command: yarn semantic-release
-
-# -------------------------
-#        WORK FLOWS
-# -------------------------
 workflows:
   test-publish:
     jobs:
-      - checkout-code
-      - test:
-          requires:
-            - checkout-code
-      - publish:
+      - test
+      - shared/release:
+          name: release-dryrun
+          dryrun: true
+          resource_class: medium
+          filters:
+            branches:
+              ignore: master
+          context:
+            - aws-credentials
+            - docker-registry
+            - ghaccesstoken
+      - shared/release:
+          resource_class: medium
           requires:
             - test
           filters:
             branches:
               only: master
+          context:
+            - aws-credentials
+            - docker-registry
+            - ghaccesstoken
