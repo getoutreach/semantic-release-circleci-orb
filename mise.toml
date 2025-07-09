@@ -9,4 +9,4 @@ run = """{{ mise_bin }} run $({{ mise_bin }} tasks ls --json | gojq --raw-output
 
 [tasks."post-stencil:circleci-orb-sync"]
 description = "Sync CircleCI orb version with devbase version"
-run = "./shell-wrapper.sh circleci-orb-sync.sh"
+run = "./scripts/shell-wrapper.sh circleci-orb-sync.sh"
