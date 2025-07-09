@@ -3,19 +3,13 @@ version: 2.1
 orbs:
   shared: getoutreach/shared@dev:2.33.0-rc.4
 
-job_defaults: &job_defaults
-  docker:
-    - image: cimg/node:20.16.0
-  environment:
-    - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
-    - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
-# -------------------------
-#          JOBS
-# -------------------------
 jobs:
   test:
-    <<: *job_defaults
+    docker:
+      - image: cimg/node:20.16.0
+    environment:
+      - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
+      - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     steps:
       - checkout
       - shared/with_node_cache:
@@ -24,9 +18,6 @@ jobs:
           name: Run tests
           command: yarn test
 
-# -------------------------
-#        WORK FLOWS
-# -------------------------
 workflows:
   test-publish:
     jobs:
