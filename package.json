@@ -27,8 +27,6 @@
     "ava": "^6.4.0",
     "conventional-changelog-conventionalcommits": "^9.0.0",
     "nyc": "^17.1.0",
-    "oxlint": "^1.6.0",
-    "prettier": "^3.6.2",
     "semantic-release": "^23.0.0",
     "tempy": "^3.0.0"
   },

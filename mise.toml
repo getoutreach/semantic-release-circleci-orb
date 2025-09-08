@@ -1,3 +1,7 @@
+[tools]
+"npm:prettier" = "3"
+oxlint = "1"
+
 [tasks.stencil]
 description = "Re-run stencil"
 run = "stencil --skip-update"
