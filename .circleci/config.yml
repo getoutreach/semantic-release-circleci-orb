@@ -9,7 +9,7 @@ environment:
 jobs:
   test:
     executor:
-      name: shared/ci-oss
+      name: shared/oss-docker
       docker_image: ghcr.io/getoutreach/bootstrap/ci-oss
       docker_tag: latest
     environment:
