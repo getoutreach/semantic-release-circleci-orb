@@ -31,9 +31,10 @@ workflows:
           name: release-dryrun
           dryrun: true
           resource_class: medium
-          executor_name: shared/oss-docker
-          docker_image: ghcr.io/getoutreach/bootstrap/ci-oss
-          docker_tag: latest
+          executor:
+            name: shared/oss-docker
+            docker_image: ghcr.io/getoutreach/bootstrap/ci-oss
+            docker_tag: latest
           filters:
             branches:
               ignore: master
