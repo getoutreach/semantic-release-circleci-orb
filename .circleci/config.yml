@@ -3,9 +3,6 @@ version: 2.1
 orbs:
   shared: getoutreach/shared@dev:2.33.0-rc.18
 
-environment:
-  ALLOW_MISE_TO_MANAGE_TOOL_VERSIONS: "true"
-
 jobs:
   test:
     executor:
@@ -14,6 +11,7 @@ jobs:
       docker_tag: latest
     environment:
       - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
+      - ALLOW_MISE_TO_MANAGE_TOOL_VERSIONS: "true"
     steps:
       - shared/setup_environment:
           restore_cache: false
