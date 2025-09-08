@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  shared: getoutreach/shared@dev:2.33.0-rc.5
+  shared: getoutreach/shared@dev:2.33.0-rc.18
 
 environment:
   ALLOW_MISE_TO_MANAGE_TOOL_VERSIONS: "true"
