@@ -27,7 +27,7 @@
     "ava": "^6.4.0",
     "conventional-changelog-conventionalcommits": "^9.0.0",
     "nyc": "^17.1.0",
-    "semantic-release": "^23.0.0",
+    "semantic-release": "^24.0.0",
     "tempy": "^3.0.0"
   },
   "engines": {
@@ -61,7 +61,7 @@
     "all": true
   },
   "peerDependencies": {
-    "semantic-release": "^23.0.0"
+    "semantic-release": "^23.0.0 || ^24.0.0"
   },
   "prettier": {
     "printWidth": 120,
