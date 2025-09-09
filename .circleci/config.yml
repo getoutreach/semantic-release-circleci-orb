@@ -1,17 +1,20 @@
 version: 2.1
 
 orbs:
-  shared: getoutreach/shared@dev:2.33.0-rc.5
+  shared: getoutreach/shared@dev:2.33.0-rc.18
 
 jobs:
   test:
-    docker:
-      - image: cimg/node:20.16.0
+    executor:
+      name: shared/oss-docker
+      docker_image: ghcr.io/getoutreach/bootstrap/ci-oss
+      docker_tag: latest
     environment:
       - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
-      - PATH: "/opt/yarn/yarn-v1.5.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - ALLOW_MISE_TO_MANAGE_TOOL_VERSIONS: "true"
     steps:
-      - checkout
+      - shared/setup_environment:
+          restore_cache: false
       - shared/with_node_cache:
           save: true
       - run:
@@ -21,11 +24,17 @@ jobs:
 workflows:
   test-publish:
     jobs:
-      - test
+      - test:
+          context:
+            - ghaccesstoken
       - shared/release:
           name: release-dryrun
           dryrun: true
           resource_class: medium
+          executor:
+            name: shared/oss-docker
+            docker_image: ghcr.io/getoutreach/bootstrap/ci-oss
+            docker_tag: latest
           filters:
             branches:
               ignore: master
