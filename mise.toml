@@ -1,16 +1,31 @@
+[task_config]
+includes = [
+  ".bootstrap/.mise/tasks",
+  ".mise/tasks",
+]
+
+[env]
+
+## <<Stencil::Block(customMiseEnvironment)>>
+
+## <</Stencil::Block>>
+
+[hooks]
+enter = [
+  "$MISE_PROJECT_ROOT/scripts/devbase.sh",
+]
+
+## <<Stencil::Block(customMiseHooks)>>
+
+## <</Stencil::Block>>
+
 [tools]
 "npm:prettier" = "3"
+
+## <<Stencil::Block(customMiseTools)>>
 oxlint = "1"
+## <</Stencil::Block>>
 
-[tasks.stencil]
-description = "Re-run stencil"
-run = "stencil --skip-update"
-depends_post = "post-stencil"
+## <<Stencil::Block(extraMise)>>
 
-[tasks.post-stencil]
-description = "Discover and run tasks meant to be run after stencil completes (prefixed with 'post-stencil:')"
-run = """{{ mise_bin }} run $({{ mise_bin }} tasks ls --json | gojq --raw-output '. | map(select(.name | startswith("post-stencil:")).name) | join(" ::: ")')"""
-
-[tasks."post-stencil:circleci-orb-sync"]
-description = "Sync CircleCI orb version with devbase version"
-run = "./scripts/shell-wrapper.sh circleci-orb-sync.sh"
+## <</Stencil::Block>>
