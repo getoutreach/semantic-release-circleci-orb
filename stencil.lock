@@ -1,8 +1,8 @@
-version: v1.43.0-rc.2
+version: v1.43.0
 modules:
     - name: github.com/getoutreach/devbase
       url: https://github.com/getoutreach/devbase
-      version: v2.33.0-rc.18
+      version: v2.35.0-rc.15
 files:
     - name: scripts/devbase.sh
       template: scripts/devbase.sh.tpl
