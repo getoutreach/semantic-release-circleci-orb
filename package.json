@@ -22,7 +22,6 @@
     "execa": "^9.6.0"
   },
   "devDependencies": {
-    "@semantic-release/git": "^10.0.1",
     "ava": "^6.4.0",
     "conventional-changelog-conventionalcommits": "^9.0.0",
     "nyc": "^17.1.0",
