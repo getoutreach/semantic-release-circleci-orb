@@ -1,12 +1,12 @@
-[tools."npm:prettier"]
-version = "3.6.2"
+[[tools."npm:prettier"]]
+version = "3.7.4"
 backend = "npm:prettier"
 
-[tools.oxlint]
-version = "1.14.0"
+[[tools.oxlint]]
+version = "1.16.0"
 backend = "aqua:oxc-project/oxc/oxlint"
-
-[tools.oxlint.platforms.linux-x64]
-checksum = "blake3:65dabaf7f2c5352bc1c24e9795c05221fb49fe51f280ab8a66bc0191b7bc18cc"
-size = 3688835
-url = "https://github.com/oxc-project/oxc/releases/download/oxlint_v1.14.0/oxlint-linux-x64-gnu.tar.gz"
+"platforms.linux-arm64" = { checksum = "sha256:766e116625962d18fa3e052a9a347eca73ce257103e7842b9ddfe1dd258a9a11", url = "https://github.com/oxc-project/oxc/releases/download/oxlint_v1.16.0/oxlint-linux-arm64-gnu.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:da49c81e99a989baf5c8024ef4fd5310808ec05284723ed277786765ab40bebf", url = "https://github.com/oxc-project/oxc/releases/download/oxlint_v1.16.0/oxlint-linux-x64-gnu.tar.gz"}
+"platforms.macos-arm64" = { checksum = "sha256:892cbadc1d1aec4891f2ed910146c36684ee14c994ac0337e95ffb40607732dd", url = "https://github.com/oxc-project/oxc/releases/download/oxlint_v1.16.0/oxlint-darwin-arm64.tar.gz"}
+"platforms.macos-x64" = { checksum = "sha256:dc4f276093186824ba32d2074ae46d360a9287fc37fe2e343d7573e9a092fe04", url = "https://github.com/oxc-project/oxc/releases/download/oxlint_v1.16.0/oxlint-darwin-x64.tar.gz"}
+"platforms.windows-x64" = { checksum = "sha256:b289f6344d8d6873dfdbca60b66a2a1cabdbceb769ee8259f663ddf4660fccc4", url = "https://github.com/oxc-project/oxc/releases/download/oxlint_v1.16.0/oxlint-win32-x64.zip"}

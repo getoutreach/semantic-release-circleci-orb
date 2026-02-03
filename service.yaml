@@ -2,6 +2,8 @@ name: semantic-release-circleci-orb
 arguments:
   releaseOptions:
     allowMajorVersions: true
+  versions:
+    prettier: "3"
 modules:
   - name: github.com/getoutreach/devbase
     channel: rc
